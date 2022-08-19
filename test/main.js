@@ -1,9 +1,10 @@
 /* global describe, it */
 
-var assert = require('assert')
-var crypto = require('crypto')
-var MerkleTools = require('../merkletools.js')
-
+import crypto from "/service/ReactNode/controlCenter/database/modules/crypto-browserify/dist/index.js";
+import MerkleTools from "/modules/merkle-tools/dist/index.js";
+import buffer from '/service/ReactNode/controlCenter/database/modules/safe-buffer/dist/index.js'
+const assert = window['@newkind/tests'].assert;
+const Buffer = buffer.Buffer;
 var bLeft = Buffer.from('a292780cc748697cb499fdcc8cb89d835609f11e502281dfe3f6690b1cc23dcb', 'hex')
 var bRight = Buffer.from('cb4990b9a8936bbc137ddeb6dcab4620897b099a450ecdc5f3e86ef4b3a7135c', 'hex')
 var mRoot = crypto.createHash('sha256').update(Buffer.concat([bLeft, bRight])).digest()
@@ -558,7 +559,7 @@ describe('Test other hash functions', function () {
       assert.equal(merkleTools.validateProof(merkleTools.getProof(0), 'e222605f939aa69b964a0a03d7075676bb3dbb40c3bd10b22f0adcb149434e7c1085c206f0e3371470a49817aa6d5b16', 'bd54df0015fa0d4fee713fbf5c8ae232c93239c75fb9d41c7dd7a9278711764a6ee83c81766b3945ed94030254537b57'), true)
     })
   })
-
+  //
   describe('make SHA3-512 tree with 2 leaves', function () {
     var merkleTools = new MerkleTools({ hashType: 'SHA3-512' })
     merkleTools.addLeaves([
@@ -566,7 +567,7 @@ describe('Test other hash functions', function () {
       '0b43a85d08c05252d0e23c96bc6b1bda11dfa787049ff452b3c86f4c6135e870c058c05131f199ef8619cfac937a736bbc936a667e4d96a5bf68e4056ce5fdce'
     ])
     merkleTools.makeTree()
-
+    //
     it('merkle root value should be correct', function () {
       assert.equal(merkleTools.getMerkleRoot().toString('hex'), '3dff3f19b67628591d294cba2c07ed20d20d83e1624af8c1dca8fcf096127b9f86435e2d6a84ca4cee526525cacd1c628bf06ee938983413afafbb4598c5862a')
     })
